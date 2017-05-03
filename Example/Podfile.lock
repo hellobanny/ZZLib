@@ -1,0 +1,19 @@
+PODS:
+  - Appirater (2.1.2)
+  - ZZLib (1.0.0):
+    - Appirater
+
+DEPENDENCIES:
+  - ZZLib (from `../`)
+
+EXTERNAL SOURCES:
+  ZZLib:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Appirater: f1c9e53e8b612193e6256144f6a0fd2e31f4340d
+  ZZLib: 2c58126436e8eb7f1e49721340d4a70c90af4695
+
+PODFILE CHECKSUM: b8fd01d8fd34471c6f69281e63197da97a6a6d15
+
+COCOAPODS: 1.2.0

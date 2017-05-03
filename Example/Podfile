@@ -1,0 +1,10 @@
+use_frameworks!
+
+target 'ZZLib_Example' do
+  pod 'ZZLib', :path => '../'
+
+  target 'ZZLib_Tests' do
+    inherit! :search_paths
+  end
+  
+end
