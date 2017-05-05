@@ -9,16 +9,23 @@
 import UIKit
 import Appirater
 import MessageUI
+import StoreKit
 
 public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     
-    var startSectionIndex:Int
-    var baseController:UIViewController
-    var appID:String
-    var appName:String
-    var color = UIColor.orange
+    public static let shared : MySetting = {
+        let instance = MySetting()
+        return instance
+    }()
     
-    public init(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?) {
+    var startSectionIndex:Int = 0
+    var baseController:UIViewController!
+    var appID:String!
+    var appName:String!
+    var color = UIColor.orange
+    var appArray = [MyApp]()
+    
+    public func config(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?) {
         startSectionIndex = startSec
         baseController = baseVC
         appID = appid
@@ -41,8 +48,30 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         Appirater.setTimeBeforeReminding(3)
         Appirater.setDebug(false)
         Appirater.appLaunched(true)
-        
-        super.init()
+    }
+    
+    public func startLoadMoreApps(callback:@escaping (Void) -> Void){
+        if appArray.count > 0 {
+            return
+        }
+        let jsonPath = HomePath + appID + ".json"
+        let jurl = URL(string: jsonPath)
+        DispatchQueue.global().async {
+            if let jdata = try? Data(contentsOf:jurl!) {
+                if let dic = try! JSONSerialization.jsonObject(with: jdata, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:Any]{
+                    if let ids = dic["apps"] as? [String] {
+                        for id in ids {
+                            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
+                            let myapp = MyApp()
+                            myapp.startLoad(appid: id, appcell: cell)
+                            self.appArray.append(myapp)
+                        }
+                    }
+                    callback()
+                }
+            }
+        }
+
     }
     
     public func numberOfSettingSections() -> Int {
@@ -55,7 +84,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             return 2
         }
         else if v == 1 {
-            return 0//more apps
+            return appArray.count//more apps
         }
         else {
             return 0
@@ -63,7 +92,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     }
     
     //得到Cell
-    public func cellFor(indexPath:IndexPath) -> UITableViewCell? {
+    public func cellFor(indexPath:IndexPath) -> UITableViewCell {
         let sec = indexPath.section - startSectionIndex
         let row = indexPath.row
         if sec == 0 {
@@ -74,11 +103,10 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             cell.accessoryType = .disclosureIndicator
             return cell
         }
-        else if sec == 1 {
-        
+        else  {
+            let myapp = appArray[row]
+            return myapp.cell
         }
-        return nil
-        
     }
     
     //点击事件
@@ -98,7 +126,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 }
                 alertController.addAction(rate)
                 
-                let share = UIAlertAction(title: "Share app to friends", style: .default ) { (action) -> Void in
+                let share = UIAlertAction(title: "Recommend this app to friends", style: .default ) { (action) -> Void in
                     self.shareApp()
                 }
                 
@@ -134,7 +162,34 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
 
         }
         else if sec == 1 {
-        
+            let app = appArray[row]
+            let sv = SKStoreProductViewController()
+            sv.delegate = self
+            sv.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier:app.id], completionBlock: { (_, err) in
+                if err == nil {
+                    self.baseController.present(sv, animated: true, completion: nil)
+                }
+            })
+        }
+    }
+    
+    public func heightFor(indexPath:IndexPath) -> CGFloat{
+        let v = indexPath.section - startSectionIndex
+        if v == 0 {
+            return 44.0
+        }
+        else {
+            return 50.0 //more apps
+        }
+    }
+    
+    public func titleFor(section:Int) -> String? {
+        let v = section - startSectionIndex
+        if v == 0 {
+            return "Support"
+        }
+        else {
+            return "More apps" //more apps
         }
     }
     
@@ -165,7 +220,6 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         }
         av.addAction(done)
         baseController.present(av, animated: true, completion: nil)
-        
     }
     
     fileprivate func emailFeedback(){
@@ -198,6 +252,12 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     
     public func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?){
         controller.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension MySetting:SKStoreProductViewControllerDelegate{
+    public func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
+        viewController.dismiss(animated: true, completion: nil)
     }
 }
 

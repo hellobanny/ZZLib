@@ -11,8 +11,6 @@ import ZZLib
 
 class TestSetting: UITableViewController {
     
-    var setting:MySetting!
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,36 +19,55 @@ class TestSetting: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        setting = MySetting(startSec: 0, baseVC: self, appid: "1213321956", color: UIColor.red, appname: "XXX")
+        MySetting.shared.config(startSec: 0, baseVC: self, appid: "1213321956", color: UIColor.red, appname: "XXX")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(TestSetting.done))
     }
 
+    func done() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        MySetting.shared.startLoadMoreApps {
+            DispatchQueue.main.async {
+                self.tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableViewRowAnimation.fade)
+            }
+        }
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return self.setting.numberOfSettingSections()
+        return MySetting.shared.numberOfSettingSections()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.setting.numberOfRowsIn(section: section)
+        return MySetting.shared.numberOfRowsIn(section: section)
     }
 
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return MySetting.shared.titleFor(section:section)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return setting.cellFor(indexPath: indexPath)!
+        return MySetting.shared.cellFor(indexPath: indexPath)
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
-            setting.clickedAt(indexPath: indexPath, cell: cell)
+            MySetting.shared.clickedAt(indexPath: indexPath, cell: cell)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return MySetting.shared.heightFor(indexPath: indexPath)
     }
 
     /*
