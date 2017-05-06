@@ -96,12 +96,21 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         let sec = indexPath.section - startSectionIndex
         let row = indexPath.row
         if sec == 0 {
-            let cell = UITableViewCell()
-            let names = ["Support " + appName,"Complain " + appName]
-            cell.textLabel?.text = names[row]
-            cell.textLabel?.textColor = color
-            cell.accessoryType = .disclosureIndicator
-            return cell
+            if row == 0 {
+                let cell = UITableViewCell()
+                cell.textLabel?.text = "Support " + appName
+                cell.imageView?.image = UIImage(named: "support.pdf")
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            }
+            else {
+                let cell = UITableViewCell()
+                cell.textLabel?.text = "Complain " + appName
+                cell.imageView?.image = UIImage(named: "complain")
+                cell.accessoryType = .disclosureIndicator
+                return cell
+            }
+            
         }
         else  {
             let myapp = appArray[row]
@@ -188,9 +197,10 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         if v == 0 {
             return "Support"
         }
-        else {
+        else if v == 1 && appArray.count > 0{
             return "More apps" //more apps
         }
+        return nil
     }
     
     fileprivate func shareApp(){
