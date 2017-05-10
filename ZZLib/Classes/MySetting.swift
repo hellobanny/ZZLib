@@ -121,7 +121,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 
                 if let path = bundle.path(forResource: "support", ofType: "png") {
                     if let image = UIImage(contentsOfFile: path) {
-                        cell.imageView?.image = image
+                        cell.imageView?.image = self.color.paintImage(image)
                     }
                 }
 
@@ -133,7 +133,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 cell.textLabel?.text = localizedString("Complain ") + appName
                 if let path = bundle.path(forResource: "complain", ofType: "png") {
                     if let image = UIImage(contentsOfFile: path) {
-                        cell.imageView?.image = image
+                        cell.imageView?.image = self.color.paintImage(image)
                     }
                 }
                 cell.accessoryType = .disclosureIndicator
