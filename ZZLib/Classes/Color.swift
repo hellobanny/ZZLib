@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIColor {
-    var rgbComponents:(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
+    public var rgbComponents:(red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
         var r:CGFloat = 0
         var g:CGFloat = 0
         var b:CGFloat = 0
@@ -20,7 +20,7 @@ extension UIColor {
         return (0,0,0,0)
     }
     // hue, saturation, brightness and alpha components from UIColor**
-    var hsbComponents:(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
+    public var hsbComponents:(hue: CGFloat, saturation: CGFloat, brightness: CGFloat, alpha: CGFloat) {
         var hue:CGFloat = 0
         var saturation:CGFloat = 0
         var brightness:CGFloat = 0
@@ -30,15 +30,17 @@ extension UIColor {
         }
         return (0,0,0,0)
     }
-    var htmlRGBColor:String {
+    
+    public var htmlRGBColor:String {
         return String(format: "#%02x%02x%02x", Int(rgbComponents.red * 255), Int(rgbComponents.green * 255),Int(rgbComponents.blue * 255))
     }
-    var htmlRGBaColor:String {
+    
+    public var htmlRGBaColor:String {
         return String(format: "#%02x%02x%02x%02x", Int(rgbComponents.red * 255), Int(rgbComponents.green * 255),Int(rgbComponents.blue * 255),Int(rgbComponents.alpha * 255) )
     }
     
     //将一个图片的颜色替换为另一个颜色
-    func paintImage(_ image:UIImage) -> UIImage{
+    public func paintImage(_ image:UIImage) -> UIImage{
         UIGraphicsBeginImageContextWithOptions(image.size,false, image.scale)
         let ref = UIGraphicsGetCurrentContext()
         ref?.translateBy(x: 0, y: image.size.height)
