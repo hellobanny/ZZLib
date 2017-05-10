@@ -96,9 +96,18 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     }
     
     private func localizedString(_ str:String) -> String {
-        
-        return NSLocalizedString(str,tableName:"ZZLibLocalizable",bundle: self.bundle,comment:"")
+        let kLocalizedStringNotFound = "kLocalizedStringNotFound"
+        var string = Bundle.main.localizedString(forKey: str, value: kLocalizedStringNotFound, table: "ZZLibLocalizable")
+        if string == kLocalizedStringNotFound {
+            string = bundle.localizedString(forKey: str, value: kLocalizedStringNotFound, table: "ZZLibLocalizable")
+        }
+        if string == kLocalizedStringNotFound {
+            print("\(str) not localized")
+            string = str
+        }
+        return string
     }
+
     
     //得到Cell
     public func cellFor(indexPath:IndexPath) -> UITableViewCell {
