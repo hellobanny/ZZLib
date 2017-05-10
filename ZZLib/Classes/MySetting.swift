@@ -27,12 +27,18 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     var bundle:Bundle!
     
     public func config(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?) {
+        
+        let bundles = Bundle.allBundles
+        for bd in bundles {
+            print(bd.bundlePath)
+        }
         if let url = Bundle.main.url(forResource: "ZZLib", withExtension: "bundle") {
             self.bundle = Bundle(url: url)!
         }
         else {
             self.bundle = Bundle.main
         }
+        self.bundle = Bundle.init(for: MySetting.classForCoder())
         startSectionIndex = startSec
         baseController = baseVC
         appID = appid
@@ -107,7 +113,8 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 let cell = UITableViewCell()
 
                 cell.textLabel?.text = NSLocalizedString("Support ",tableName:"ZZLibLocalizable",bundle: self.bundle,comment:"") + appName
-                cell.imageView?.image = UIImage(named: "support.pdf")
+                
+                cell.imageView?.image = UIImage(named: "support", in: self.bundle, compatibleWith: nil)
                 cell.accessoryType = .disclosureIndicator
                 return cell
             }
