@@ -28,17 +28,8 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     
     public func config(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?) {
         
-        let bundles = Bundle.allBundles
-        for bd in bundles {
-            print(bd.bundlePath)
-        }
-        if let url = Bundle.main.url(forResource: "ZZLib", withExtension: "bundle") {
-            self.bundle = Bundle(url: url)!
-        }
-        else {
-            self.bundle = Bundle.main
-        }
-        self.bundle = Bundle.init(for: MySetting.classForCoder())
+        self.bundle = Bundle(for: MySetting.self as AnyClass)
+        
         startSectionIndex = startSec
         baseController = baseVC
         appID = appid
@@ -114,16 +105,19 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
 
                 cell.textLabel?.text = NSLocalizedString("Support ",tableName:"ZZLibLocalizable",bundle: self.bundle,comment:"") + appName
                 
-                cell.imageView?.image = UIImage(named: "support", in: self.bundle, compatibleWith: nil)
+                if let path = bundle.path(forResource: "support", ofType: "png") {
+                    if let image = UIImage(contentsOfFile: path) {
+                        cell.imageView?.image = image
+                    }
+                }
+
                 cell.accessoryType = .disclosureIndicator
                 return cell
             }
             else {
                 let cell = UITableViewCell()
                 cell.textLabel?.text = NSLocalizedString("Complain ",tableName:"ZZLibLocalizable",bundle: self.bundle,comment:"") + appName
-                let bundle = Bundle(for: MySetting.self as AnyClass)
-                
-                if let path = bundle.path(forResource: "complain", ofType: "pdf") {
+                if let path = bundle.path(forResource: "complain", ofType: "png") {
                     if let image = UIImage(contentsOfFile: path) {
                         cell.imageView?.image = image
                     }
