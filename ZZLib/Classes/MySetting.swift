@@ -121,7 +121,13 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             else {
                 let cell = UITableViewCell()
                 cell.textLabel?.text = NSLocalizedString("Complain ",tableName:"ZZLibLocalizable",bundle: self.bundle,comment:"") + appName
-                cell.imageView?.image = UIImage(named: "complain")
+                let bundle = Bundle(for: MySetting.self as AnyClass)
+                
+                if let path = bundle.path(forResource: "complain", ofType: "pdf") {
+                    if let image = UIImage(contentsOfFile: path) {
+                        cell.imageView?.image = image
+                    }
+                }
                 cell.accessoryType = .disclosureIndicator
                 return cell
             }
