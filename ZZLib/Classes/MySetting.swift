@@ -187,7 +187,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 }
                 alertController.addAction(rate)
                 
-                let share = UIAlertAction(title: localizedString("Contact with weixin"), style: .default ) { (action) -> Void in
+                let share = UIAlertAction(title: localizedString("Connect WeChat Official Account"), style: .default ) { (action) -> Void in
                     self.contactWithWeixin()
                 }
                 alertController.addAction(share)
