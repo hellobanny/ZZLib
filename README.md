@@ -117,6 +117,14 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
 }
 ```
 
+Section的标题
+
+```
+override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return MySetting.shared.titleFor(section:section)
+}
+```
+
 ## Author
 
 张忠, hellobanny@gmail.com
