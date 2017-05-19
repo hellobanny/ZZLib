@@ -167,8 +167,12 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 let share = UIAlertAction(title: localizedString("Recommend this app to friends"),style: .default ) { (action) -> Void in
                     self.shareApp()
                 }
-                
                 alertController.addAction(share)
+                
+                let wx = UIAlertAction(title: localizedString("Connect WeChat Official Account"), style: .default ) { (action) -> Void in
+                    self.contactWithWeixin()
+                }
+                alertController.addAction(wx)
                 
                 alertController.view.tintColor = color
                 alertController.popoverPresentationController?.sourceView = cell
@@ -275,7 +279,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             }
             let device = UIDevice.current
             let size = UIScreen.main.bounds.size
-            mvc.setMessageBody("\n\n\n-----------------------------\n Name: \(appName)\n Device: \(device.localizedModel) \n OS Version:\(device.systemVersion)\n App Version:\(version)\n Screen:\(size.width)*\(size.height)\n", isHTML: false)
+            mvc.setMessageBody("\n\n\n-----------------------------\n Name: \(appName!)\n Device: \(device.localizedModel) \n OS Version:\(device.systemVersion)\n App Version:\(version)\n Screen Size: \(size.width) * \(size.height)\n", isHTML: false)
             mvc.popoverPresentationController?.sourceView = baseController.view
             mvc.popoverPresentationController?.sourceRect = baseController.view.bounds
             baseController.present(mvc, animated: true, completion: nil)
