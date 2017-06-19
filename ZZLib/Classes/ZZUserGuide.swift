@@ -7,7 +7,7 @@
 //
 import Foundation
 
-class Guide{
+public class Guide{
     var key:String
     var value:String
     
@@ -17,17 +17,21 @@ class Guide{
     }
 }
 
-class ZZUserGuide {
+public class ZZUserGuide {
     
-    var allGuides = [Guide]()
+    private var allGuides = [Guide]()
     
     static let shared : ZZUserGuide = {
         let instance = ZZUserGuide()
         return instance
     }()
     
+    public func appendGuides(_ guides:[Guide]) {
+        allGuides.append(contentsOf: guides)
+    }
+    
     //显示一个提示，如果必要的话
-    func showIfRequireGuide(_ key:String,turnOffNow:Bool,call: @escaping (_ title:String) -> Void){
+    public func showIfRequireGuide(_ key:String,turnOffNow:Bool,call: @escaping (_ title:String) -> Void){
         if !self.isGuideFinish(key) {
             for gd in allGuides{
                 if gd.key == key {
@@ -40,23 +44,23 @@ class ZZUserGuide {
         }
     }
     
-    func isGuideFinish(_ key:String)-> Bool{
+    public func isGuideFinish(_ key:String)-> Bool{
         return UserDefaults.standard.bool(forKey: key)
     }
     
-    func turnOffGuild(_ key:String){
+    public func turnOffGuild(_ key:String){
         let ud = UserDefaults.standard
         ud.set(true, forKey: key)
         ud.synchronize()
     }
     
-    func resetGuide(_ key:String){
+    public func resetGuide(_ key:String){
         let ud = UserDefaults.standard
         ud.set(false, forKey: key)
         ud.synchronize()
     }
     
-    func resetGuides(){
+    public func resetGuides(){
         let ud = UserDefaults.standard
         for guide in allGuides{
             ud.set(false, forKey: guide.key)
