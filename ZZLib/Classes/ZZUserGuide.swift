@@ -21,7 +21,7 @@ public class ZZUserGuide {
     
     private var allGuides = [Guide]()
     
-    static let shared : ZZUserGuide = {
+    public static let shared : ZZUserGuide = {
         let instance = ZZUserGuide()
         return instance
     }()
