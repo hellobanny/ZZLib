@@ -7,11 +7,6 @@
 //
 import Foundation
 
-public struct ZZGuide{
-    public var key:String
-    public var value:String
-}
-
 public class ZZUserGuide {
     
     private var allGuides = [ZZGuide]()
