@@ -8,13 +8,8 @@
 import Foundation
 
 public struct ZZGuide{
-    var key:String
-    var value:String
-    
-    init(k:String,v:String){
-        key = k
-        value = v
-    }
+    public var key:String
+    public var value:String
 }
 
 public class ZZUserGuide {
