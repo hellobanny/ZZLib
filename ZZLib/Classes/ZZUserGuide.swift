@@ -7,7 +7,7 @@
 //
 import Foundation
 
-public class Guide{
+public struct ZZGuide{
     var key:String
     var value:String
     
@@ -19,14 +19,14 @@ public class Guide{
 
 public class ZZUserGuide {
     
-    private var allGuides = [Guide]()
+    private var allGuides = [ZZGuide]()
     
     public static let shared : ZZUserGuide = {
         let instance = ZZUserGuide()
         return instance
     }()
     
-    public func appendGuides(_ guides:[Guide]) {
+    public func appendGuides(_ guides:[ZZGuide]) {
         allGuides.append(contentsOf: guides)
     }
     
