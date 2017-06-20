@@ -20,6 +20,15 @@ public class ZZUserGuide {
         allGuides.append(contentsOf: guides)
     }
     
+    public func valueOfKey(_ key:String) -> String? {
+        for gd in allGuides{
+            if gd.key == key {
+                return gd.value
+            }
+        }
+        return nil
+    }
+    
     //显示一个提示，如果必要的话
     public func showIfRequireGuide(_ key:String,turnOffNow:Bool,call: @escaping (_ title:String) -> Void){
         if !self.isGuideFinish(key) {
