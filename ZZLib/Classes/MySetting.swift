@@ -54,6 +54,13 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         Appirater.appLaunched(true)
     }
     
+    public func startBackgroundLoad(appid:String) {
+        self.appID = appid
+        self.startLoadMoreApps {
+            
+        }
+    }
+    
     public func startLoadMoreApps(callback:@escaping (Void) -> Void){
         if appArray.count > 0 {
             return
