@@ -25,8 +25,10 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     var color = UIColor.orange
     var appArray = [MyApp]()
     var bundle:Bundle!
+    var isLock:Bool = false
+    var lockNumber:Int = 0
     
-    public func config(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?) {
+    public func config(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?, lock:Bool = false) {
         
         self.bundle = Bundle(for: MySetting.self as AnyClass)
         
@@ -52,6 +54,13 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         Appirater.setTimeBeforeReminding(3)
         Appirater.setDebug(false)
         Appirater.appLaunched(true)
+        if lock {
+            isLock = true
+            lockNumber = appArray.count
+        }
+        else {
+            isLock = false
+        }
     }
     
     public func startBackgroundLoad(appid:String) {
@@ -95,7 +104,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             return 2
         }
         else if v == 1 {
-            return appArray.count//more apps
+            return isLock ? lockNumber : appArray.count//more apps
         }
         else {
             return 0
