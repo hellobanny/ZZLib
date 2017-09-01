@@ -12,7 +12,7 @@ public class MyWebVC: UIViewController {
     
     var webView: UIWebView!
     
-    var targetUrl:URL!
+    public var targetUrl:URL!
     
     override public func viewDidLoad() {
         super.viewDidLoad()
