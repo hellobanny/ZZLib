@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ZZUserGuideICloud: NSObject {
+public class ZZUserGuideICloud: NSObject {
     private var allGuides = [ZZGuide]()
     
     public static let shared : ZZUserGuideICloud = {
