@@ -28,7 +28,7 @@ public class MyWebVC: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(MyWebVC.done))
     }
     
-    func done() {
+    @objc func done() {
         if isModal() {
             self.dismiss(animated: true, completion: nil)
         }

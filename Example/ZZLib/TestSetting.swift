@@ -23,7 +23,7 @@ class TestSetting: UITableViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(TestSetting.done))
     }
 
-    func done() {
+    @objc func done() {
         self.dismiss(animated: true, completion: nil)
     }
     

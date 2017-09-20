@@ -70,13 +70,13 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         }
     }
     
-    public func startLoadMoreApps(callback:@escaping (Void) -> Void){
+    public func startLoadMoreApps(callback:@escaping () -> Void){
         if appArray.count > 0 {
             return
         }
         let jsonPath = HomePath + appID + ".json"
         let jurl = URL(string: jsonPath)
-        DispatchQueue.global().async {
+        DispatchQueue.main.async {
             if let jdata = try? Data(contentsOf:jurl!) {
                 if let dic = try! JSONSerialization.jsonObject(with: jdata, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:Any]{
                     if let ids = dic["apps"] as? [String] {

@@ -44,23 +44,23 @@ public class ZZUserGuideICloud: NSObject {
     }
     
     public func isGuideFinish(_ key:String)-> Bool{
-        return NSUbiquitousKeyValueStore.default().bool(forKey: key)
+        return NSUbiquitousKeyValueStore.default.bool(forKey: key)
     }
     
     public func turnOffGuild(_ key:String){
-        let ud = NSUbiquitousKeyValueStore.default()
+        let ud = NSUbiquitousKeyValueStore.default
         ud.set(true, forKey: key)
         ud.synchronize()
     }
     
     public func resetGuide(_ key:String){
-        let ud = NSUbiquitousKeyValueStore.default()
+        let ud = NSUbiquitousKeyValueStore.default
         ud.set(false, forKey: key)
         ud.synchronize()
     }
     
     public func resetGuides(){
-        let ud = NSUbiquitousKeyValueStore.default()
+        let ud = NSUbiquitousKeyValueStore.default
         for guide in allGuides{
             ud.set(false, forKey: guide.key)
         }
