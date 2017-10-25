@@ -14,11 +14,10 @@ class MyApp: NSObject {
     var id:String!
     var title:String?
     var detail:String?
-    var cell:UITableViewCell!
+    var image:UIImage?
     
-    func startLoad(appid:String,appcell:UITableViewCell){
+    func loadMoreInfo(appid:String){
         self.id = appid
-        self.cell = appcell
         var isCn = false
         if let str = NSLocale.preferredLanguages.first {
             if str == "zh-Hans-CN" {
@@ -37,17 +36,12 @@ class MyApp: NSObject {
                     self.title = dic["title"] as? String
                     self.detail = dic["detail"] as? String
                 }
-                self.cell.textLabel?.text = self.title
-                self.cell.detailTextLabel?.text = self.detail
             }
         }
-        
         let picPath = HomePath + appid + ".png"
         let url = URL(string: picPath)
         if let data = try? Data(contentsOf: url!) {
-            self.cell.imageView?.image = UIImage(data: data)
-            self.cell.imageView?.layer.masksToBounds = true
-            self.cell.imageView?.layer.cornerRadius = 8.0
+            self.image = UIImage(data:data)
         }
     }
 }

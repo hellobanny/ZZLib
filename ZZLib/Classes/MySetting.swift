@@ -65,33 +65,63 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     
     public func startBackgroundLoad(appid:String) {
         self.appID = appid
-        self.startLoadMoreApps {
-            
-        }
-    }
-    
-    public func startLoadMoreApps(callback:@escaping () -> Void){
-        if appArray.count > 0 {
+        guard let ud = UserDefaults(suiteName: "us.appby.apps") else {
             return
         }
-        let jsonPath = HomePath + appID + ".json"
-        let jurl = URL(string: jsonPath)
-        DispatchQueue.main.async {
-            if let jdata = try? Data(contentsOf:jurl!) {
-                if let dic = try! JSONSerialization.jsonObject(with: jdata, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:Any]{
-                    if let ids = dic["apps"] as? [String] {
-                        for id in ids {
-                            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
-                            let myapp = MyApp()
-                            myapp.startLoad(appid: id, appcell: cell)
-                            self.appArray.append(myapp)
-                        }
+        let keyTime = "ZZUpdateTime"
+        let keyApps = "ZZAppsList"
+        let keyImage = "ZZAppIcon"
+        let lastUpdateTime = Date(timeIntervalSince1970:        ud.double(forKey: keyTime))
+        if lastUpdateTime.timeIntervalSinceNow > -15 * 24 * 3600  {//每15天更新一下，否则从本地读取
+            appArray.removeAll()
+            if let string = ud.string(forKey: keyApps){
+                let cps = string.components(separatedBy: CharacterSet.newlines)
+                var i = 0
+                while i + 2 < cps.count{
+                    let myapp = MyApp()
+                    myapp.id = cps[i]
+                    myapp.title = cps[i+1]
+                    myapp.detail = cps[i+2]
+                    appArray.append(myapp)
+                    if let data = ud.data(forKey: keyImage + cps[i]) {
+                        myapp.image = UIImage(data: data)
                     }
-                    callback()
+                    i += 3
+                }
+            }
+            return
+        }
+        else {
+            let jsonPath = HomePath + appID + ".json"
+            let jurl = URL(string: jsonPath)
+            DispatchQueue.global().async {
+                if let jdata = try? Data(contentsOf:jurl!) {
+                    if let dic = try! JSONSerialization.jsonObject(with: jdata, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:Any]{
+                        
+                        if let ids = dic["apps"] as? [String] {
+                            for id in ids {
+                                let myapp = MyApp()
+                                myapp.loadMoreInfo(appid: id)
+                                self.appArray.append(myapp)
+                                //save image
+                                if let img = myapp.image {
+                                    if let data = UIImagePNGRepresentation(img){
+                                        ud.set(data, forKey: keyImage + id)
+                                    }
+                                }
+                            }
+                        }
+                        var appstr = ""
+                        for app in self.appArray {
+                            appstr += "\(app.id!)\n\(app.title!)\n\(app.detail!)\n"
+                        }
+                        ud.set(appstr, forKey: keyApps)
+                        ud.set(Date().timeIntervalSince1970, forKey: keyTime)
+                        ud.synchronize()
+                    }
                 }
             }
         }
-
     }
     
     public func numberOfSettingSections() -> Int {
@@ -159,7 +189,11 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         }
         else  {
             let myapp = appArray[row]
-            return myapp.cell
+            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
+            cell.imageView?.image = myapp.image
+            cell.textLabel?.text = myapp.title
+            cell.detailTextLabel?.text = myapp.detail
+            return cell
         }
     }
     

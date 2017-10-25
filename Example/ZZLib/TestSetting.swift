@@ -19,7 +19,7 @@ class TestSetting: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        MySetting.shared.config(startSec: 0, baseVC: self, appid: "1213321956", color: UIColor.red, appname: "XXX")
+        MySetting.shared.config(startSec: 0, baseVC: self, appid: "1051212505", color: UIColor.red, appname: "XXX")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(TestSetting.done))
     }
 
@@ -33,11 +33,7 @@ class TestSetting: UITableViewController {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-        MySetting.shared.startLoadMoreApps {
-            DispatchQueue.main.async {
-                self.tableView.reloadSections(IndexSet(integersIn: 1...1), with: UITableViewRowAnimation.fade)
-            }
-        }
+        
     }
     // MARK: - Table view data source
 

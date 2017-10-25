@@ -53,20 +53,12 @@ override func viewDidLoad() {
 }
 ```
 
-显示时开始载入更多应用
+在合适的时候载入更多应用，更新的频次是15天，可以在App启动时，或是某些View 载入时
 
 ```
-    
-override func viewDidAppear(_ animated: Bool) {
-	tableView.reloadData()
-	MySetting.shared.startLoadMoreApps {
-	    DispatchQueue.main.async {
-	        if self.tableView != nil {
-	            self.tableView.reloadSections(IndexSet(integersIn: StartSection+1...StartSection+1), with: UITableViewRowAnimation.fade)
-	        }
-	    }
-	}
-}
+
+MySetting.shared.startBackgroundLoad(appid: "1051212505")
+
 ```
 
 Section数目：
