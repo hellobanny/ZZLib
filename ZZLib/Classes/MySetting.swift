@@ -191,6 +191,8 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             let myapp = appArray[row]
             let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
             cell.imageView?.image = myapp.image
+            cell.imageView?.layer.cornerRadius = 10.0
+            cell.imageView?.layer.masksToBounds = true
             cell.textLabel?.text = myapp.title
             cell.detailTextLabel?.text = myapp.detail
             return cell
