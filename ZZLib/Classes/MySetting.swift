@@ -20,8 +20,8 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     
     var startSectionIndex:Int = 0
     var baseController:UIViewController!
-    var appID:String!
-    var appName:String!
+    var appID:String = ""
+    var appName:String = ""
     var color = UIColor.orange
     var appArray = [MyApp]()
     var bundle:Bundle!
@@ -331,7 +331,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             }
             let device = UIDevice.current
             let size = UIScreen.main.bounds.size
-            mvc.setMessageBody("\n\n\n-----------------------------\n Name: \(appName!)\n Device: \(device.localizedModel) \n OS Version:\(device.systemVersion)\n App Version:\(version)\n Screen Size: \(size.width) * \(size.height)\n", isHTML: false)
+            mvc.setMessageBody("\n\n\n-----------------------------\n Name: \(appName)\n Device: \(device.localizedModel) \n OS Version:\(device.systemVersion)\n App Version:\(version)\n Screen Size: \(size.width) * \(size.height)\n", isHTML: false)
             mvc.popoverPresentationController?.sourceView = baseController.view
             mvc.popoverPresentationController?.sourceRect = baseController.view.bounds
             baseController.present(mvc, animated: true, completion: nil)
