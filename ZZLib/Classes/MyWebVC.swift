@@ -25,7 +25,7 @@ public class MyWebVC: UIViewController {
         if (targetUrl != nil) {
             webView.loadRequest(URLRequest(url: targetUrl))
         }
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(MyWebVC.done))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(MyWebVC.done))
     }
     
     @objc func done() {

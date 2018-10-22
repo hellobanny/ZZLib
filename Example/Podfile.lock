@@ -1,19 +1,23 @@
 PODS:
-  - Appirater (2.1.2)
-  - ZZLib (0.1.5):
+  - Appirater (2.3.1)
+  - ZZLib (0.3.0):
     - Appirater
 
 DEPENDENCIES:
   - ZZLib (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Appirater
 
 EXTERNAL SOURCES:
   ZZLib:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Appirater: f1c9e53e8b612193e6256144f6a0fd2e31f4340d
-  ZZLib: 4dd73ddf83b3fd622d8b71a84f8ab11994f674e3
+  Appirater: 44a4651f7912a17dc906b655f0c215d5bb768b84
+  ZZLib: 6965198da370c9868b8f3fca4d6574a1a421a8c3
 
 PODFILE CHECKSUM: b8fd01d8fd34471c6f69281e63197da97a6a6d15
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.5.3

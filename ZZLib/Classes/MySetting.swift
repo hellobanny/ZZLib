@@ -105,7 +105,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                                 self.appArray.append(myapp)
                                 //save image
                                 if let img = myapp.image {
-                                    if let data = UIImagePNGRepresentation(img){
+                                    if let data = img.pngData(){
                                         ud.set(data, forKey: keyImage + id)
                                     }
                                 }
@@ -189,7 +189,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         }
         else  {
             let myapp = appArray[row]
-            let cell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: nil)
+            let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
             cell.imageView?.image = myapp.image
             cell.imageView?.layer.cornerRadius = 10.0
             cell.imageView?.layer.masksToBounds = true
@@ -292,7 +292,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         let text = "\(appName) https://itunes.apple.com/app/id\(appID)"
         let items = [text]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        activityVC.excludedActivityTypes = [UIActivityType.assignToContact]
+        activityVC.excludedActivityTypes = [UIActivity.ActivityType.assignToContact]
         activityVC.popoverPresentationController?.sourceView = baseController.view
         activityVC.popoverPresentationController?.sourceRect = baseController.view.bounds
         baseController.present(activityVC, animated: true, completion: nil)
@@ -307,7 +307,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         let done = UIAlertAction(title: localizedString("Open Weixin"), style: .default) { (_) in
             if let url = URL(string: "weixin://") {
                 if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
                 } else {
                     // Fallback on earlier versions
                     UIApplication.shared.openURL(url)
@@ -357,3 +357,8 @@ extension MySetting:SKStoreProductViewControllerDelegate{
     }
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
+}
