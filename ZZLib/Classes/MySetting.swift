@@ -211,7 +211,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 }
                 alertController.addAction(cancelAction)
                 
-                let rate = UIAlertAction(title: localizedString("Give 5 star review"), style: .default ) { (action) -> Void in
+                let rate = UIAlertAction(title: localizedString("Rate App"), style: .default ) { (action) -> Void in
                     Appirater.rateApp()
                 }
                 alertController.addAction(rate)

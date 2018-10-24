@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		51107CD7218002750093814A /* ZZLib in Resources */ = {isa = PBXBuildFile; fileRef = 51107CD6218002750093814A /* ZZLib */; };
 		518AE4C91EB9A26E00DD6C4D /* TestSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518AE4C81EB9A26E00DD6C4D /* TestSetting.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -31,6 +32,7 @@
 		06B38504E4F3605C843B12F5 /* Pods-ZZLib_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZZLib_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ZZLib_Tests/Pods-ZZLib_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		22334D9C0C4F5724C2F736DD /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		2A6211C609A49E74D35143BA /* Pods_ZZLib_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZZLib_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		51107CD6218002750093814A /* ZZLib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ZZLib; path = ../ZZLib; sourceTree = "<group>"; };
 		51379B891EBDD48E00D298BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		51379B8A1EBDD48F00D298BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		518AE4C81EB9A26E00DD6C4D /* TestSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSetting.swift; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
+				51107CD6218002750093814A /* ZZLib */,
 				607FACF51AFB993E008FA782 /* Podspec Metadata */,
 				607FACD21AFB9204008FA782 /* Example for ZZLib */,
 				607FACE81AFB9204008FA782 /* Tests */,
@@ -249,6 +252,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51107CD7218002750093814A /* ZZLib in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,

@@ -1,6 +1,6 @@
 PODS:
   - Appirater (2.3.1)
-  - ZZLib (0.3.0):
+  - ZZLib (0.4.0):
     - Appirater
 
 DEPENDENCIES:
@@ -16,7 +16,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Appirater: 44a4651f7912a17dc906b655f0c215d5bb768b84
-  ZZLib: 6965198da370c9868b8f3fca4d6574a1a421a8c3
+  ZZLib: d3b17fa74defff14733d7376b7ee4d5e18a26295
 
 PODFILE CHECKSUM: b8fd01d8fd34471c6f69281e63197da97a6a6d15
 
