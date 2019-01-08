@@ -1,7 +1,9 @@
 PODS:
   - Appirater (2.3.1)
-  - ZZLib (0.4.0):
+  - Localize-Swift (2.0.0)
+  - ZZLib (0.5.0):
     - Appirater
+    - Localize-Swift
 
 DEPENDENCIES:
   - ZZLib (from `../`)
@@ -9,6 +11,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Appirater
+    - Localize-Swift
 
 EXTERNAL SOURCES:
   ZZLib:
@@ -16,7 +19,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Appirater: 44a4651f7912a17dc906b655f0c215d5bb768b84
-  ZZLib: d3b17fa74defff14733d7376b7ee4d5e18a26295
+  Localize-Swift: c798ec9286494866f7068f85f7c71283ac5bdab4
+  ZZLib: b431106101789c8a267abd9871b67eb3cc875c6a
 
 PODFILE CHECKSUM: b8fd01d8fd34471c6f69281e63197da97a6a6d15
 

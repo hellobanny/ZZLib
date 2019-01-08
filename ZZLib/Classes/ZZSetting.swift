@@ -1,9 +1,8 @@
 //
-//  MySetting.swift
-//  Pods
+//  ZZHomeTC.swift
+//  ZZLib
 //
-//  Created by 张忠 on 2017/5/3.
-//
+//  Created by 张忠 on 2019/1/8.
 //
 
 import UIKit
@@ -12,10 +11,10 @@ import MessageUI
 import StoreKit
 import Localize_Swift
 
-public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
+class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
     
-    public static let shared : MySetting = {
-        let instance = MySetting()
+    public static let shared : ZZSetting = {
+        let instance = ZZSetting()
         return instance
     }()
     
@@ -24,15 +23,14 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     var appID:String = ""
     var appName:String = ""
     var color = UIColor.orange
-    var appArray = [MyApp]()
+    var moreApps = [ZZApp]()
     var bundle:Bundle!
-    var isLock:Bool = false
-    var lockNumber:Int = 0
     
-    public func config(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?, lock:Bool = false) {
-        
-        self.bundle = Bundle(for: MySetting.self as AnyClass)
-        
+    override init() {
+        self.bundle = Bundle(for: ZZSetting.self as AnyClass)
+    }
+    
+    public func config(startSec:Int, baseVC:UIViewController, appid:String, color:UIColor, appname:String?, moreApps:[ZZApp]) {
         startSectionIndex = startSec
         baseController = baseVC
         appID = appid
@@ -47,6 +45,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             }
         }
         self.color = color
+        self.moreApps = moreApps
         
         Appirater.setAppId(appID)
         Appirater.setDaysUntilPrompt(7)
@@ -55,74 +54,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         Appirater.setTimeBeforeReminding(3)
         Appirater.setDebug(false)
         Appirater.appLaunched(true)
-        if lock {
-            isLock = true
-            lockNumber = appArray.count
-        }
-        else {
-            isLock = false
-        }
-    }
-    
-    public func startBackgroundLoad(appid:String) {
-        self.appID = appid
-        guard let ud = UserDefaults(suiteName: "us.appby.apps") else {
-            return
-        }
-        let keyTime = "ZZUpdateTime"
-        let keyApps = "ZZAppsList"
-        let keyImage = "ZZAppIcon"
-        let lastUpdateTime = Date(timeIntervalSince1970:        ud.double(forKey: keyTime))
-        if lastUpdateTime.timeIntervalSinceNow > -15 * 24 * 3600  {//每15天更新一下，否则从本地读取
-            appArray.removeAll()
-            if let string = ud.string(forKey: keyApps){
-                let cps = string.components(separatedBy: CharacterSet.newlines)
-                var i = 0
-                while i + 2 < cps.count{
-                    let myapp = MyApp()
-                    myapp.id = cps[i]
-                    myapp.title = cps[i+1]
-                    myapp.detail = cps[i+2]
-                    appArray.append(myapp)
-                    if let data = ud.data(forKey: keyImage + cps[i]) {
-                        myapp.image = UIImage(data: data)
-                    }
-                    i += 3
-                }
-            }
-            return
-        }
-        else {
-            let jsonPath = HomePath + appID + ".json"
-            let jurl = URL(string: jsonPath)
-            DispatchQueue.global().async {
-                if let jdata = try? Data(contentsOf:jurl!) {
-                    if let dic = try! JSONSerialization.jsonObject(with: jdata, options: JSONSerialization.ReadingOptions.mutableLeaves) as? [String:Any]{
-                        
-                        if let ids = dic["apps"] as? [String] {
-                            for id in ids {
-                                let myapp = MyApp()
-                                myapp.loadMoreInfo(appid: id)
-                                self.appArray.append(myapp)
-                                //save image
-                                if let img = myapp.image {
-                                    if let data = img.pngData(){
-                                        ud.set(data, forKey: keyImage + id)
-                                    }
-                                }
-                            }
-                        }
-                        var appstr = ""
-                        for app in self.appArray {
-                            appstr += "\(app.id!)\n\(app.title!)\n\(app.detail!)\n"
-                        }
-                        ud.set(appstr, forKey: keyApps)
-                        ud.set(Date().timeIntervalSince1970, forKey: keyTime)
-                        ud.synchronize()
-                    }
-                }
-            }
-        }
+        
     }
     
     public func numberOfSettingSections() -> Int {
@@ -135,27 +67,12 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             return 2
         }
         else if v == 1 {
-            return isLock ? lockNumber : appArray.count//more apps
+            return moreApps.count
         }
         else {
             return 0
         }
     }
-    
-    /*
-    private func localizedString(_ str:String) -> String {
-        let kLocalizedStringNotFound = "kLocalizedStringNotFound"
-        var string = Bundle.main.localizedString(forKey: str, value: kLocalizedStringNotFound, table: "ZZLibLocalizable")
-        if string == kLocalizedStringNotFound {
-            string = bundle.localizedString(forKey: str, value: kLocalizedStringNotFound, table: "ZZLibLocalizable")
-        }
-        if string == kLocalizedStringNotFound {
-            print("\(str) not localized")
-            string = str
-        }
-        return string
-    }
-    */
     
     //得到Cell
     public func cellFor(indexPath:IndexPath) -> UITableViewCell {
@@ -164,7 +81,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         if sec == 0 {
             if row == 0 {
                 let cell = UITableViewCell()
-
+                
                 cell.textLabel?.text = "Support ".localized(using: "ZZLibLocalizable") + appName
                 
                 if let path = bundle.path(forResource: "support", ofType: "png") {
@@ -172,7 +89,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                         cell.imageView?.image = self.color.paintImage(image)
                     }
                 }
-
+                
                 cell.accessoryType = .disclosureIndicator
                 return cell
             }
@@ -190,13 +107,13 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             
         }
         else  {
-            let myapp = appArray[row]
+            let myapp = moreApps[row]
             let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
-            cell.imageView?.image = myapp.image
+            cell.imageView?.image = myapp.appIcon()
             cell.imageView?.layer.cornerRadius = 10.0
             cell.imageView?.layer.masksToBounds = true
-            cell.textLabel?.text = myapp.title
-            cell.detailTextLabel?.text = myapp.detail
+            cell.textLabel?.text = myapp.appTitle()
+            cell.detailTextLabel?.text = myapp.appDescription()
             return cell
         }
     }
@@ -255,13 +172,13 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 alertController.popoverPresentationController?.sourceRect = cell.bounds
                 baseController.present(alertController, animated: true, completion: nil)
             }
-
+            
         }
         else if sec == 1 {
-            let app = appArray[row]
+            let app = moreApps[row]
             let sv = SKStoreProductViewController()
             sv.delegate = self
-            sv.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier:app.id], completionBlock: { (_, err) in
+            sv.loadProduct(withParameters: [SKStoreProductParameterITunesItemIdentifier:app.appId()], completionBlock: { (_, err) in
                 if err == nil {
                     self.baseController.present(sv, animated: true, completion: nil)
                 }
@@ -284,7 +201,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         if v == 0 {
             return "Support".localized(using: "ZZLibLocalizable")
         }
-        else if v == 1 && appArray.count > 0{
+        else if v == 1 && moreApps.count > 0{
             return "More apps".localized(using: "ZZLibLocalizable") //more apps
         }
         return nil
@@ -309,7 +226,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         let done = UIAlertAction(title: "Open Weixin".localized(using: "ZZLibLocalizable"), style: .default) { (_) in
             if let url = URL(string: "weixin://") {
                 if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
+                    UIApplication.shared.open(url, options: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly:NSNumber(booleanLiteral: false)], completionHandler: nil)
                 } else {
                     // Fallback on earlier versions
                     UIApplication.shared.openURL(url)
@@ -353,14 +270,8 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     }
 }
 
-extension MySetting:SKStoreProductViewControllerDelegate{
+extension ZZSetting:SKStoreProductViewControllerDelegate{
     public func productViewControllerDidFinish(_ viewController: SKStoreProductViewController) {
         viewController.dismiss(animated: true, completion: nil)
     }
-}
-
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertToUIApplicationOpenExternalURLOptionsKeyDictionary(_ input: [String: Any]) -> [UIApplication.OpenExternalURLOptionsKey: Any] {
-	return Dictionary(uniqueKeysWithValues: input.map { key, value in (UIApplication.OpenExternalURLOptionsKey(rawValue: key), value)})
 }

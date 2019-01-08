@@ -23,5 +23,10 @@ class ViewController: UIViewController {
         
     }
 
+    @IBAction func test2(_ sender: Any) {
+        let thtc = TestHomeTC()
+        let nav = UINavigationController(rootViewController: thtc)
+        self.present(nav, animated: true, completion: nil)
+    }
 }
 
