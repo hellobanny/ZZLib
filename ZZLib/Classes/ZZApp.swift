@@ -8,7 +8,7 @@
 import UIKit
 import Localize_Swift
 
-enum ZZApp {
+public enum ZZApp {
     case myGoals
     case planimeter
     case memory
@@ -36,7 +36,10 @@ enum ZZApp {
         }
     }
     
-    func appIcon() -> UIImage?{
+    func appIcon(bundle:Bundle) -> UIImage?{
+        if let path = bundle.path(forResource: appId(), ofType: "jpg"){
+            return UIImage(contentsOfFile: path)
+        }
         return UIImage(named: appId())
     }
     

@@ -11,7 +11,7 @@ import MessageUI
 import StoreKit
 import Localize_Swift
 
-class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
+public class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
     
     public static let shared : ZZSetting = {
         let instance = ZZSetting()
@@ -54,7 +54,6 @@ class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
         Appirater.setTimeBeforeReminding(3)
         Appirater.setDebug(false)
         Appirater.appLaunched(true)
-        
     }
     
     public func numberOfSettingSections() -> Int {
@@ -108,12 +107,9 @@ class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
         }
         else  {
             let myapp = moreApps[row]
-            let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
-            cell.imageView?.image = myapp.appIcon()
-            cell.imageView?.layer.cornerRadius = 10.0
-            cell.imageView?.layer.masksToBounds = true
-            cell.textLabel?.text = myapp.appTitle()
-            cell.detailTextLabel?.text = myapp.appDescription()
+            let nib = bundle.loadNibNamed("ZZAppCell", owner: self, options: nil)
+            let cell = nib?.first! as! ZZAppCell
+            cell.configWith(app: myapp, bundle: bundle)
             return cell
         }
     }
