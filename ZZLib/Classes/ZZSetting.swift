@@ -56,6 +56,10 @@ public class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
         Appirater.appLaunched(true)
     }
     
+    public func changeLanguage(lan:String){
+        Localize.setCurrentLanguage(lan)
+    }
+    
     public func numberOfSettingSections() -> Int {
         return 2
     }
