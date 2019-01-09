@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ZZLib/Classes/MySetting.swift"
-            timestampString = "568384207.541211"
+            timestampString = "568704924.7841949"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ZZLib/Classes/MySetting.swift"
-            timestampString = "568384207.541782"
+            timestampString = "568704924.78427"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ZZLib/Classes/MySetting.swift"
-            timestampString = "568384207.542051"
+            timestampString = "568704924.78433"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "283"
@@ -76,7 +76,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ZZLib/Classes/ZZApp.swift"
-            timestampString = "568649313.3878191"
+            timestampString = "568704924.784385"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "40"
@@ -92,12 +92,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../ZZLib/Classes/ZZApp.swift"
-            timestampString = "568649313.3879271"
+            timestampString = "568704924.7844419"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
             endingLineNumber = "21"
             landmarkName = "appId()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/Localize-Swift/Sources/String+LocalizedBundleTableName.swift"
+            timestampString = "568704280.740967"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "localized(using:in:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Pods/Localize-Swift/Sources/String+LocalizedBundleTableName.swift"
+            timestampString = "568704280.74134"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "localized(using:in:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

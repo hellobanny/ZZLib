@@ -165,7 +165,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             if row == 0 {
                 let cell = UITableViewCell()
 
-                cell.textLabel?.text = "Support ".localized(using: "ZZLibLocalizable") + appName
+                cell.textLabel?.text = "Support ".zzLocal() + appName
                 
                 if let path = bundle.path(forResource: "support", ofType: "png") {
                     if let image = UIImage(contentsOfFile: path) {
@@ -178,7 +178,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             }
             else {
                 let cell = UITableViewCell()
-                cell.textLabel?.text = "Complain ".localized(using: "ZZLibLocalizable") + appName
+                cell.textLabel?.text = "Complain ".zzLocal() + appName
                 if let path = bundle.path(forResource: "complain", ofType: "png") {
                     if let image = UIImage(contentsOfFile: path) {
                         cell.imageView?.image = self.color.paintImage(image)
@@ -207,23 +207,23 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         let row = indexPath.row
         if sec == 0 {
             if row == 0 {
-                let alertController = UIAlertController(title: "Support ".localized(using: "ZZLibLocalizable") + appName, message: nil, preferredStyle: .actionSheet)
+                let alertController = UIAlertController(title: "Support ".zzLocal() + appName, message: nil, preferredStyle: .actionSheet)
                 
-                let cancelAction = UIAlertAction(title: "Cancel".localized(using: "ZZLibLocalizable"), style: .cancel) { (action) in
+                let cancelAction = UIAlertAction(title: "Cancel".zzLocal(), style: .cancel) { (action) in
                 }
                 alertController.addAction(cancelAction)
                 
-                let rate = UIAlertAction(title: "Rate App".localized(using: "ZZLibLocalizable"), style: .default ) { (action) -> Void in
+                let rate = UIAlertAction(title: "Rate App".zzLocal(), style: .default ) { (action) -> Void in
                     Appirater.rateApp()
                 }
                 alertController.addAction(rate)
                 
-                let share = UIAlertAction(title: "Recommend this app to friends".localized(using: "ZZLibLocalizable"),style: .default ) { (action) -> Void in
+                let share = UIAlertAction(title: "Recommend this app to friends".zzLocal(),style: .default ) { (action) -> Void in
                     self.shareApp()
                 }
                 alertController.addAction(share)
                 
-                let wx = UIAlertAction(title: "Connect WeChat Official Account".localized(using: "ZZLibLocalizable"), style: .default ) { (action) -> Void in
+                let wx = UIAlertAction(title: "Connect WeChat Official Account".zzLocal(), style: .default ) { (action) -> Void in
                     self.contactWithWeixin()
                 }
                 alertController.addAction(wx)
@@ -234,18 +234,18 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
                 baseController.present(alertController, animated: true, completion: nil)
             }
             else {
-                let alertController = UIAlertController(title: "Complain ".localized(using: "ZZLibLocalizable") + appName, message: nil, preferredStyle: .actionSheet)
+                let alertController = UIAlertController(title: "Complain ".zzLocal() + appName, message: nil, preferredStyle: .actionSheet)
                 
-                let cancelAction = UIAlertAction(title: "Cancel".localized(using: "ZZLibLocalizable"), style: .cancel) { (action) in
+                let cancelAction = UIAlertAction(title: "Cancel".zzLocal(), style: .cancel) { (action) in
                 }
                 alertController.addAction(cancelAction)
                 
-                let rate = UIAlertAction(title: "Complain by email".localized(using: "ZZLibLocalizable") , style: .default ) { (action) -> Void in
+                let rate = UIAlertAction(title: "Complain by email".zzLocal() , style: .default ) { (action) -> Void in
                     self.emailFeedback()
                 }
                 alertController.addAction(rate)
                 
-                let share = UIAlertAction(title: "Connect WeChat Official Account".localized(using: "ZZLibLocalizable"), style: .default ) { (action) -> Void in
+                let share = UIAlertAction(title: "Connect WeChat Official Account".zzLocal(), style: .default ) { (action) -> Void in
                     self.contactWithWeixin()
                 }
                 alertController.addAction(share)
@@ -282,10 +282,10 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     public func titleFor(section:Int) -> String? {
         let v = section - startSectionIndex
         if v == 0 {
-            return "Support".localized(using: "ZZLibLocalizable")
+            return "Support".zzLocal()
         }
         else if v == 1 && appArray.count > 0{
-            return "More apps".localized(using: "ZZLibLocalizable") //more apps
+            return "More apps".zzLocal() //more apps
         }
         return nil
     }
@@ -303,10 +303,10 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     fileprivate func contactWithWeixin() {
         let name = "私房水果工具"
         UIPasteboard.general.string = name
-        let av = UIAlertController(title: "Notice".localized(using: "ZZLibLocalizable"), message: "在微信中关注订阅号 " + name + "，反馈问题和接收新消息。订阅号名称已复制到你的剪贴板中。", preferredStyle: .alert)
-        let cancel = UIAlertAction(title:"Cancel".localized(using: "ZZLibLocalizable"), style: .cancel, handler: nil)
+        let av = UIAlertController(title: "Notice".zzLocal(), message: "在微信中关注订阅号 " + name + "，反馈问题和接收新消息。订阅号名称已复制到你的剪贴板中。", preferredStyle: .alert)
+        let cancel = UIAlertAction(title:"Cancel".zzLocal(), style: .cancel, handler: nil)
         av.addAction(cancel)
-        let done = UIAlertAction(title: "Open Weixin".localized(using: "ZZLibLocalizable"), style: .default) { (_) in
+        let done = UIAlertAction(title: "Open Weixin".zzLocal(), style: .default) { (_) in
             if let url = URL(string: "weixin://") {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
@@ -324,7 +324,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         if MFMailComposeViewController.canSendMail(){
             let mvc = MFMailComposeViewController()
             mvc.mailComposeDelegate = self
-            mvc.setSubject("Feedback".localized(using: "ZZLibLocalizable"))
+            mvc.setSubject("Feedback".zzLocal())
             mvc.setToRecipients(["hellobanny@gmail.com"])
             var version = ""
             let vobj: AnyObject? = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as AnyObject?
@@ -339,8 +339,8 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
             baseController.present(mvc, animated: true, completion: nil)
         }
         else {
-            let alertController = UIAlertController(title: "Notice".localized(using: "ZZLibLocalizable"), message: "Your device doesn't support send email.".localized(using: "ZZLibLocalizable"), preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "OK".localized(using: "ZZLibLocalizable"), style: .cancel) { (action) in
+            let alertController = UIAlertController(title: "Notice".zzLocal(), message: "Your device doesn't support send email.".zzLocal(), preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "OK".zzLocal(), style: .cancel) { (action) in
                 print(action)
             }
             alertController.addAction(cancelAction)

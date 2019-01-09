@@ -44,40 +44,41 @@ public enum ZZApp {
     }
     
     func appTitle() -> String{
+        print(Localize.currentLanguage())
         switch self {
         case .myGoals:
-            return "My Goals".localized(using: "ZZLibLocalizable")
+            return "My Goals".zzLocal()
         case .planimeter:
-            return "Planimeter".localized(using: "ZZLibLocalizable")
+            return "Planimeter".zzLocal()
         case .memory:
-            return "Memory".localized(using: "ZZLibLocalizable")
+            return "Memory".zzLocal()
         case .magnify:
-            return "Magnify".localized(using: "ZZLibLocalizable")
+            return "Magnify".zzLocal()
         case .artmap:
-            return "ArtMap".localized(using: "ZZLibLocalizable")
+            return "ArtMap".zzLocal()
         case .measure:
-            return "Measure".localized(using: "ZZLibLocalizable")
+            return "Measure".zzLocal()
         case .monotasking:
-            return "Monotasking".localized(using: "ZZLibLocalizable")
+            return "Monotasking".zzLocal()
         }
     }
     
     func appDescription() -> String{
         switch self {
         case .myGoals:
-            return "Self management and todo list".localized(using: "ZZLibLocalizable")
+            return "Self management and todo list".zzLocal()
         case .planimeter:
-            return "Measure area and distance".localized(using: "ZZLibLocalizable")
+            return "Measure area and distance".zzLocal()
         case .memory:
-            return "Ebbinghaus forgetting curve".localized(using: "ZZLibLocalizable")
+            return "Ebbinghaus forgetting curve".zzLocal()
         case .magnify:
-            return "Magnify screenshot for developer".localized(using: "ZZLibLocalizable")
+            return "Magnify screenshot for developer".zzLocal()
         case .artmap:
-            return "Create wallpaper from map".localized(using: "ZZLibLocalizable")
+            return "Create wallpaper from map".zzLocal()
         case .measure:
-            return "Measure area and distance by AutoNavi".localized(using: "ZZLibLocalizable")
+            return "Measure area and distance by AutoNavi".zzLocal()
         case .monotasking:
-            return "Timer tool for monotasking".localized(using: "ZZLibLocalizable")
+            return "Timer tool for monotasking".zzLocal()
         }
     }
 }

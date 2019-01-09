@@ -37,6 +37,14 @@
                                     <action selector="test2:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="bzs-fW-N8M"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wiG-rJ-DFP">
+                                <rect key="frame" x="138" y="63" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="修改语言"/>
+                                <connections>
+                                    <action selector="changeLanguage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="fE0-bY-x2d"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>

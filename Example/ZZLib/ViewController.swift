@@ -8,6 +8,7 @@
 
 import UIKit
 import ZZLib
+import Localize_Swift
 
 class ViewController: UIViewController {
 
@@ -27,6 +28,27 @@ class ViewController: UIViewController {
         let thtc = TestHomeTC(style: .grouped)
         let nav = UINavigationController(rootViewController: thtc)
         self.present(nav, animated: true, completion: nil)
+    }
+    
+    @IBAction func changeLanguage(_ sender: Any) {
+        let langs = Localize.availableLanguages(true)
+        let alertController = UIAlertController(title: "Switch Language".localized(), message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel) { (action) in
+        }
+        alertController.addAction(cancelAction)
+        
+        for lan in langs {
+            let edit = UIAlertAction(title: Localize.displayNameForLanguage(lan) , style: .default ) { (action) -> Void in
+                Localize.setCurrentLanguage(lan)
+                ZZSetting.shared.changeLanguage(lan: lan)
+            }
+            alertController.addAction(edit)
+        }
+        
+        self.present(alertController, animated: true) {
+            // ...
+        }
     }
 }
 
