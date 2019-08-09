@@ -303,10 +303,10 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     fileprivate func contactWithWeixin() {
         let name = "私房水果工具"
         UIPasteboard.general.string = name
-        let av = UIAlertController(title: "Notice".zzLocal(), message: "在微信中关注订阅号 " + name + "，反馈问题和接收新消息。订阅号名称已复制到你的剪贴板中。", preferredStyle: .alert)
+        let av = UIAlertController(title: "Notice".zzLocal(), message: "在微信中关注订阅号 " + name + "订阅号名称已复制到你的剪贴板中。", preferredStyle: .alert)
         let cancel = UIAlertAction(title:"Cancel".zzLocal(), style: .cancel, handler: nil)
         av.addAction(cancel)
-        let done = UIAlertAction(title: "Open Weixin".zzLocal(), style: .default) { (_) in
+        let done = UIAlertAction(title: "Open WeChat".zzLocal(), style: .default) { (_) in
             if let url = URL(string: "weixin://") {
                 if #available(iOS 10.0, *) {
                     UIApplication.shared.open(url, options: convertToUIApplicationOpenExternalURLOptionsKeyDictionary([:]), completionHandler: nil)
