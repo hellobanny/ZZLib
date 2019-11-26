@@ -301,6 +301,9 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     }
     
     fileprivate func contactWithWeixin() {
+        let vc = WechatHomeVC()
+        baseController.navigationController?.pushViewController(vc, animated: true)
+        /*
         let name = "私房水果工具"
         UIPasteboard.general.string = name
         let av = UIAlertController(title: "Notice".zzLocal(), message: "在微信中关注订阅号 " + name + "订阅号名称已复制到你的剪贴板中。", preferredStyle: .alert)
@@ -318,6 +321,7 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
         }
         av.addAction(done)
         baseController.present(av, animated: true, completion: nil)
+         */
     }
     
     fileprivate func emailFeedback(){

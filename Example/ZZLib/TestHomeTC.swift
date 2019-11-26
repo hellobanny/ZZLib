@@ -23,7 +23,7 @@ class TestHomeTC: UITableViewController {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        ZZSetting.shared.config(startSec: 0, baseVC: self, appid: "1051212505", color: UIColor.red, appname: "XXX", moreApps: [.myGoals,.planimeter,.magnify,.measure,.artmap,.memory,.monotasking])
+        ZZSetting.shared.config(startSec: 0, baseVC: self, appid: "1051212505", color: UIColor.red, appname: "XXX", moreApps: [.redbox,.myGoals,.planimeter,.magnify,.measure,.artmap,.memory,.monotasking])
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(TestSetting.done))
     }

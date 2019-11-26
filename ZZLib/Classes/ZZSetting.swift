@@ -218,6 +218,10 @@ public class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
     }
     
     fileprivate func contactWithWeixin() {
+        let bundle = Bundle(for: WechatHomeVC.self)
+        let vc = WechatHomeVC(nibName: "WechatHomeVC", bundle: bundle)
+        baseController.navigationController?.pushViewController(vc, animated: true)
+        /*
         let name = "私房水果工具"
         UIPasteboard.general.string = name
         let av = UIAlertController(title: "Notice".zzLocal(), message: "Connect WeChat official account ".localized() + name + " ." + "The official account name has copy to pasteboard.", preferredStyle: .alert)
@@ -235,6 +239,7 @@ public class ZZSetting: NSObject,MFMailComposeViewControllerDelegate {
         }
         av.addAction(done)
         baseController.present(av, animated: true, completion: nil)
+         */
     }
     
     fileprivate func emailFeedback(){

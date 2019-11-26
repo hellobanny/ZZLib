@@ -16,6 +16,7 @@ public enum ZZApp {
     case artmap
     case measure
     case monotasking
+    case redbox
     
     func appId() -> String {
         switch self {
@@ -33,6 +34,8 @@ public enum ZZApp {
             return "1250815924"
         case .monotasking:
             return "1329154894"
+        case .redbox:
+            return "1473577627"
         }
     }
     
@@ -60,6 +63,8 @@ public enum ZZApp {
             return "Measure".zzLocal()
         case .monotasking:
             return "Monotasking".zzLocal()
+        case .redbox:
+            return "Redbox".zzLocal()
         }
     }
     
@@ -79,6 +84,8 @@ public enum ZZApp {
             return "Measure area and distance by AutoNavi".zzLocal()
         case .monotasking:
             return "Timer tool for monotasking".zzLocal()
+        case .redbox:
+            return "Many cool tools in one box".zzLocal()
         }
     }
 }
