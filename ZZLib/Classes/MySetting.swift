@@ -301,7 +301,8 @@ public class MySetting: NSObject,MFMailComposeViewControllerDelegate {
     }
     
     fileprivate func contactWithWeixin() {
-        let vc = WechatHomeVC()
+        let bundle = Bundle(for: WechatHomeVC.self)
+        let vc = WechatHomeVC(nibName: "WechatHomeVC", bundle: bundle)
         baseController.navigationController?.pushViewController(vc, animated: true)
         /*
         let name = "私房水果工具"

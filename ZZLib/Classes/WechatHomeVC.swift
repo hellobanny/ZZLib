@@ -18,12 +18,15 @@ class WechatHomeVC: UIViewController {
     }
 
     @objc func shareImage(){
-        if let img = UIImage(named: "wechatgzh") {
-            let items = [img]
-            let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            activityVC.excludedActivityTypes = [UIActivity.ActivityType.assignToContact]
-            activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
-            self.present(activityVC, animated: true, completion: nil)
+        let bundle = Bundle(for: WechatHomeVC.self)
+        if let path = bundle.path(forResource: "wechatgzh", ofType: "jpg"){
+            if let img = UIImage(contentsOfFile: path) {
+                let items = [img]
+                let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+                activityVC.excludedActivityTypes = [UIActivity.ActivityType.assignToContact]
+                activityVC.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+                self.present(activityVC, animated: true, completion: nil)
+            }
         }
     }
     /*
