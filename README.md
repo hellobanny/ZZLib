@@ -23,20 +23,6 @@ pod 'ZZLib', :git => 'https://github.com/hellobanny/ZZLib.git'
 ```
 
 ## 配置例子
-里面的网站使用了http，需要加这个权限控制
-
-```
-<key>NSAppTransportSecurity</key>
-<dict>
-	<key>NSAllowsArbitraryLoads</key>
-	<true/>
-	<key>NSExceptionDomains</key>
-	<dict>
-		<key>appby.us</key>
-		<string></string>
-	</dict>
-</dict>
-```
 
 定义开始的Section
 
@@ -49,23 +35,16 @@ let StartSection = 1
 ```
 override func viewDidLoad() {
    super.viewDidLoad()
-   MySetting.shared.config(startSec: StartSection, baseVC: self, appid: APPID, color: CommonConfig.shared.mainColor, appname: nil)
+   ZZSetting.shared.config(startSec: 0, baseVC: self, appid: APPID, color: CommonConfig.shared.mainColor, appname: "My Goals".localized(), moreApps: [.redbox,.measure,.memory])
 }
 ```
 
-在合适的时候载入更多应用，更新的频次是15天，可以在App启动时，或是某些View 载入时
-
-```
-
-MySetting.shared.startBackgroundLoad(appid: "1051212505")
-
-```
 
 Section数目：
 
 ```    
 override func numberOfSections(in tableView: UITableView) -> Int {
-     return StartSection + MySetting.shared.numberOfSettingSections()
+     return StartSection + ZZSetting.shared.numberOfSettingSections()
 }
     
 ```
@@ -91,7 +70,7 @@ override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: Inde
     }
     else {
         if let cell = tableView.cellForRow(at: indexPath) {
-            MySetting.shared.clickedAt(indexPath: indexPath, cell: cell)
+            ZZSetting.shared.clickedAt(indexPath: indexPath, cell: cell)
         }
     }
 }
@@ -104,7 +83,7 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
     if indexPath.section < StartSection {        return cell
     }
     else {
-        return MySetting.shared.cellFor(indexPath: indexPath)
+        return ZZSetting.shared.cellFor(indexPath: indexPath)
     }
 }
 ```
@@ -113,7 +92,7 @@ Section的标题
 
 ```
 override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    return MySetting.shared.titleFor(section:section)
+    return ZZSetting.shared.titleFor(section:section)
 }
 ```
 
