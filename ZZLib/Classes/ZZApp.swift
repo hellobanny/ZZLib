@@ -17,6 +17,7 @@ public enum ZZApp {
     case measure
     case monotasking
     case redbox
+    case kuibu
     
     func appId() -> String {
         switch self {
@@ -36,6 +37,8 @@ public enum ZZApp {
             return "1329154894"
         case .redbox:
             return "1473577627"
+        case .kuibu:
+            return "1494266625"
         }
     }
     
@@ -65,6 +68,8 @@ public enum ZZApp {
             return "Monotasking".zzLocal()
         case .redbox:
             return "Redbox".zzLocal()
+        case .kuibu:
+            return "Kuibu".zzLocal()
         }
     }
     
@@ -86,6 +91,8 @@ public enum ZZApp {
             return "Timer tool for monotasking".zzLocal()
         case .redbox:
             return "Many cool tools in one box".zzLocal()
+        case .kuibu:
+            return "Manage your life by number".zzLocal()
         }
     }
 }

@@ -287,3 +287,20 @@ extension String{
         return self.localized(using: "ZZLibLocalizable", in: bundle)
     }
 }
+
+extension UIColor{
+    public func paintImage(_ image:UIImage) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(image.size,false, image.scale)
+        let ref = UIGraphicsGetCurrentContext()
+        ref?.translateBy(x: 0, y: image.size.height)
+        ref?.scaleBy(x: 1.0, y: -1.0)
+        ref?.setBlendMode(CGBlendMode.normal)
+        let rect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        ref?.clip(to: rect, mask: image.cgImage!)
+        self.setFill()
+        ref?.fill(rect)
+        let re = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return re!
+    }
+}

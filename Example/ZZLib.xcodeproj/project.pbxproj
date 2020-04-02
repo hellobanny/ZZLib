@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		51107CD7218002750093814A /* ZZLib in Resources */ = {isa = PBXBuildFile; fileRef = 51107CD6218002750093814A /* ZZLib */; };
-		518AE4C91EB9A26E00DD6C4D /* TestSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518AE4C81EB9A26E00DD6C4D /* TestSetting.swift */; };
 		51E5410921E49CE0009E65B4 /* TestHomeTC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E5410821E49CE0009E65B4 /* TestHomeTC.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -36,7 +35,6 @@
 		51107CD6218002750093814A /* ZZLib */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ZZLib; path = ../ZZLib; sourceTree = "<group>"; };
 		51379B891EBDD48E00D298BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		51379B8A1EBDD48F00D298BB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
-		518AE4C81EB9A26E00DD6C4D /* TestSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestSetting.swift; sourceTree = "<group>"; };
 		51E5410821E49CE0009E65B4 /* TestHomeTC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHomeTC.swift; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* ZZLib_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZZLib_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,7 +110,6 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
-				518AE4C81EB9A26E00DD6C4D /* TestSetting.swift */,
 				51E5410821E49CE0009E65B4 /* TestHomeTC.swift */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -233,10 +230,9 @@
 			};
 			buildConfigurationList = 607FACCB1AFB9204008FA782 /* Build configuration list for PBXProject "ZZLib" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 				"zh-Hans",
@@ -340,7 +336,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
-				518AE4C91EB9A26E00DD6C4D /* TestSetting.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				51E5410921E49CE0009E65B4 /* TestHomeTC.swift in Sources */,
 			);
